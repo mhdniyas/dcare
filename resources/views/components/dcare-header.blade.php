@@ -1,26 +1,31 @@
 <!-- D Care Header Component -->
-<header class="bg-white shadow-soft sticky top-0 z-50" x-data="headerComponent()">
-    <!-- Top Navigation Bar -->
-    <div class="bg-primary-600 text-white py-2">
+<header class="bg-white shadow-xl sticky top-0 z-50 backdrop-blur-sm transition-all duration-300" 
+        :class="scrolled ? 'bg-white/30' : 'bg-white/95'" 
+        x-data="headerComponent()" 
+        @scroll.window="scrolled = window.scrollY > 50"
+        x-init="scrolled = false">
+    <!-- Top Navigation Bar - Desktop Only -->
+    <div class="hidden md:block bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-black py-2 shadow-lg">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between text-sm">
                 <div class="flex items-center space-x-4">
-                    <span class="hidden md:inline">Over 20,000+ Medical Products</span>
-                    <span class="hidden lg:inline">•</span>
-                    <span class="hidden lg:inline">500K+ Users</span>
+                    <span class="font-medium text-black">Over 20,000+ Medical Products</span>
+                    <span class="text-black/60">•</span>
+                    <span class="text-black/80">500K+ Users</span>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <a href="{{ route('pages.help') }}" class="hover:text-accent-400 transition-colors">Help</a>
-                    <a href="{{ route('pages.track-order') }}" class="hover:text-accent-400 transition-colors">Track Order</a>
-                    <a href="{{ route('pages.contact') }}" class="hover:text-accent-400 transition-colors">Contact</a>
+                <div class="flex items-center space-x-6">
+                    <a href="{{ route('pages.help') }}" class="text-black hover:text-accent-400 transition-colors font-medium hover:scale-105 transform">Help</a>
+                    <a href="{{ route('pages.track-order') }}" class="text-black hover:text-accent-400 transition-colors font-medium hover:scale-105 transform">Track Order</a>
+                    <a href="{{ route('pages.contact') }}" class="text-black hover:text-accent-400 transition-colors font-medium hover:scale-105 transform">Contact</a>
+                    <a href="{{ route('quote') }}" class="text-black hover:text-accent-400 transition-colors font-medium hover:scale-105 transform">Get Quote</a>
+                    <a href="{{ route('pages.about') }}" class="text-black hover:text-accent-400 transition-colors font-medium hover:scale-105 transform">About Us</a>
                 </div>
             </div>
         </div>
     </div>
 
-
     <!-- Main Header -->
-    <div class="bg-white border-b border-gray-200">
+    <div class="bg-white border-b border-gray-200 shadow-md">
         <div class="container mx-auto px-4">
             <!-- Desktop Layout -->
             <div class="hidden md:block">
@@ -28,15 +33,13 @@
                 <div class="flex items-center justify-between py-4">
                     <!-- Logo -->
                     <div class="flex-shrink-0">
-                        <a href="{{ route('home') }}" class="flex items-center space-x-2 group">
-                            <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center group-hover:bg-primary-700 transition-colors">
-                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                </svg>
+                        <a href="{{ route('home') }}" class="flex items-center space-x-3 group">
+                            <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center group-hover:from-primary-700 group-hover:to-primary-800 transition-all duration-300 shadow-lg group-hover:shadow-xl group-hover:scale-105 transform">
+                                <img src="{{ asset('d.png') }}" alt="D Care Logo" class="w-7 h-7 object-contain">
                             </div>
                             <div>
                                 <h1 class="text-2xl font-bold text-primary-600 group-hover:text-primary-700 transition-colors">D Care</h1>
-                                <p class="text-xs text-gray-500">Medical Solutions</p>
+                                <p class="text-xs text-gray-500 font-medium">Medical Solutions</p>
                             </div>
                         </a>
                     </div>
@@ -121,9 +124,18 @@
                 
                 <!-- Row 2: Navigation Menu -->
                 <div class="flex items-center justify-center space-x-1 py-3 border-t border-gray-200 overflow-x-auto scrollbar-hide">
+                    <a href="{{ route('home') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Home</a>
                     <a href="{{ route('products.index') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Products</a>
                     <a href="{{ route('categories.index') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Categories</a>
+                    <a href="{{ route('categories.hospital') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Hospital</a>
+                    <a href="{{ route('categories.dental') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Dental</a>
+                    <a href="{{ route('categories.clinic') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Clinic</a>
                     <a href="{{ route('marketplace') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Marketplace</a>
+                    <a href="{{ route('quote') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Quote</a>
+                    <a href="{{ route('pages.about') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">About Us</a>
+                    <a href="{{ route('pages.contact') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Contact</a>
+                    <a href="{{ route('pages.help') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Help</a>
+                    <a href="{{ route('pages.track-order') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Track Order</a>
                 </div>
             </div>
 
@@ -132,14 +144,12 @@
                 <!-- Row 1: Logo and Account/Cart -->
                 <div class="flex items-center justify-between py-3">
                     <a href="{{ route('home') }}" class="flex items-center space-x-2">
-                        <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg">
+                            <img src="{{ asset('d.png') }}" alt="D Care Logo" class="w-6 h-6 object-contain">
                         </div>
                         <div>
                             <h1 class="text-xl font-bold text-primary-600">D Care</h1>
-                            <p class="text-xs text-gray-500">Medical Solutions</p>
+                            <p class="text-xs text-gray-500 font-medium">Medical Solutions</p>
                         </div>
                     </a>
                     
@@ -198,6 +208,15 @@
                         <div class="flex overflow-x-auto gap-3 pb-1 scrollbar-hide">
                             <div class="flex-shrink-0">
                                 <button 
+                                    @click="selectedNav = 'home'; window.location.href = '{{ route('home') }}'"
+                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    :class="selectedNav === 'home' ? 'bg-primary-100 text-primary-800' : ''"
+                                >
+                                    Home
+                                </button>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <button 
                                     @click="selectedNav = 'products'; window.location.href = '{{ route('products.index') }}'"
                                     class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
                                     :class="selectedNav === 'products' ? 'bg-primary-100 text-primary-800' : ''"
@@ -212,6 +231,33 @@
                                     :class="selectedNav === 'categories' ? 'bg-primary-100 text-primary-800' : ''"
                                 >
                                     Categories
+                                </button>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <button 
+                                    @click="selectedNav = 'hospital'; window.location.href = '{{ route('categories.hospital') }}'"
+                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    :class="selectedNav === 'hospital' ? 'bg-primary-100 text-primary-800' : ''"
+                                >
+                                    Hospital
+                                </button>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <button 
+                                    @click="selectedNav = 'dental'; window.location.href = '{{ route('categories.dental') }}'"
+                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    :class="selectedNav === 'dental' ? 'bg-primary-100 text-primary-800' : ''"
+                                >
+                                    Dental
+                                </button>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <button 
+                                    @click="selectedNav = 'clinic'; window.location.href = '{{ route('categories.clinic') }}'"
+                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    :class="selectedNav === 'clinic' ? 'bg-primary-100 text-primary-800' : ''"
+                                >
+                                    Clinic
                                 </button>
                             </div>
                             <div class="flex-shrink-0">
@@ -263,11 +309,18 @@
                 </div>
                 
                 <nav class="space-y-4">
+                    <a href="{{ route('home') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Home</a>
                     <a href="{{ route('products.index') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Products</a>
                     <a href="{{ route('categories.index') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Categories</a>
+                    <a href="{{ route('categories.hospital') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Hospital Equipment</a>
+                    <a href="{{ route('categories.dental') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Dental Equipment</a>
+                    <a href="{{ route('categories.clinic') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Clinic Equipment</a>
                     <a href="{{ route('marketplace') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Marketplace</a>
-                    <a href="{{ route('pages.about') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">About</a>
-                    <a href="{{ route('pages.contact') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Contact</a>
+                    <a href="{{ route('quote') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Get Quote</a>
+                    <a href="{{ route('pages.about') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">About Us</a>
+                    <a href="{{ route('pages.contact') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Contact Us</a>
+                    <a href="{{ route('pages.help') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Help</a>
+                    <a href="{{ route('pages.track-order') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Track Order</a>
                 </nav>
             </div>
         </div>
@@ -282,8 +335,12 @@ function headerComponent() {
         cartItems: [],
         mobileMenuOpen: false,
         cartOpen: false,
+        scrolled: false,
         
         init() {
+            // Initialize scroll state
+            this.scrolled = window.scrollY > 50;
+            
             // Load cart from localStorage
             this.loadCart();
             
