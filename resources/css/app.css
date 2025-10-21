@@ -34,3 +34,64 @@
 .luxury-border {
     @apply border border-gray-200 shadow-md;
 }
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Dark Theme Background */
+.dark-theme {
+    background-color: #313131;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.171) 2px, transparent 0);
+    background-size: 30px 30px;
+    background-position: -5px -5px;
+    min-height: 100vh;
+}
+
+/* Dark Theme Text Colors */
+.dark-theme .text-gray-900 {
+    @apply text-white;
+}
+
+.dark-theme .text-gray-800 {
+    @apply text-gray-100;
+}
+
+.dark-theme .text-gray-700 {
+    @apply text-gray-200;
+}
+
+.dark-theme .text-gray-600 {
+    @apply text-gray-300;
+}
+
+.dark-theme .text-gray-500 {
+    @apply text-gray-400;
+}
+
+/* Dark Theme Backgrounds */
+.dark-theme .bg-white {
+    @apply bg-gray-800;
+}
+
+.dark-theme .bg-gray-50 {
+    @apply bg-gray-700;
+}
+
+.dark-theme .bg-gray-100 {
+    @apply bg-gray-600;
+}
+
+/* Dark Theme Borders */
+.dark-theme .border-gray-200 {
+    @apply border-gray-600;
+}
+
+.dark-theme .border-gray-300 {
+    @apply border-gray-500;
+}
