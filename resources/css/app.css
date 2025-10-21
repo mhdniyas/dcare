@@ -44,54 +44,92 @@
     display: none;
 }
 
-/* Dark Theme Background */
-.dark-theme {
-    background-color: #313131;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.171) 2px, transparent 0);
-    background-size: 30px 30px;
-    background-position: -5px -5px;
+/* Porsche-Inspired Olive Green Theme */
+.porsche-olive-theme {
+    background: linear-gradient(135deg, #2d5016 0%, #4a7c59 50%, #6b8e23 100%);
+    background-attachment: fixed;
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
 }
 
-/* Dark Theme Text Colors */
-.dark-theme .text-gray-900 {
-    @apply text-white;
+.porsche-olive-theme::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(107, 142, 35, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(74, 124, 89, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
 }
 
-.dark-theme .text-gray-800 {
-    @apply text-gray-100;
+/* Porsche Theme Text Colors */
+.porsche-olive-theme .text-gray-900 {
+    @apply text-green-800;
 }
 
-.dark-theme .text-gray-700 {
-    @apply text-gray-200;
+.porsche-olive-theme .text-gray-800 {
+    @apply text-green-700;
 }
 
-.dark-theme .text-gray-600 {
-    @apply text-gray-300;
+.porsche-olive-theme .text-gray-700 {
+    @apply text-green-600;
 }
 
-.dark-theme .text-gray-500 {
-    @apply text-gray-400;
+.porsche-olive-theme .text-gray-600 {
+    @apply text-green-500;
 }
 
-/* Dark Theme Backgrounds */
-.dark-theme .bg-white {
-    @apply bg-gray-800;
+.porsche-olive-theme .text-gray-500 {
+    @apply text-green-400;
 }
 
-.dark-theme .bg-gray-50 {
-    @apply bg-gray-700;
+/* Porsche Theme Backgrounds */
+.porsche-olive-theme .bg-white {
+    @apply bg-green-100/95 backdrop-blur-sm;
 }
 
-.dark-theme .bg-gray-100 {
-    @apply bg-gray-600;
+.porsche-olive-theme .bg-gray-50 {
+    @apply bg-green-200/90 backdrop-blur-sm;
 }
 
-/* Dark Theme Borders */
-.dark-theme .border-gray-200 {
-    @apply border-gray-600;
+.porsche-olive-theme .bg-gray-100 {
+    @apply bg-green-300/85 backdrop-blur-sm;
 }
 
-.dark-theme .border-gray-300 {
-    @apply border-gray-500;
+/* Porsche Theme Borders */
+.porsche-olive-theme .border-gray-200 {
+    @apply border-white/30;
 }
+
+.porsche-olive-theme .border-gray-300 {
+    @apply border-white/40;
+}
+
+/* Porsche Gradient Text */
+.porsche-gradient-text {
+    background: linear-gradient(135deg, #6b8e23 0%, #9acd32 50%, #adff2f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Floating Medical Elements */
+.floating-medical-icon {
+    position: absolute;
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.floating-medical-icon:nth-child(1) { animation-delay: 0s; }
+.floating-medical-icon:nth-child(2) { animation-delay: 2s; }
+.floating-medical-icon:nth-child(3) { animation-delay: 4s; }
+.floating-medical-icon:nth-child(4) { animation-delay: 1s; }
+.floating-medical-icon:nth-child(5) { animation-delay: 3s; }
+.floating-medical-icon:nth-child(6) { animation-delay: 5s; }
