@@ -4,7 +4,7 @@
         <!-- Section Header -->
         <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Top Categories</h2>
-            <a href="/categories" class="text-primary-600 hover:text-primary-700 font-medium transition-colors">View All</a>
+            <a href="{{ route('categories.index') }}" class="text-primary-600 hover:text-primary-700 font-medium transition-colors">View All</a>
         </div>
         
         <!-- Category Grid -->
@@ -16,47 +16,53 @@
                     @mouseenter="hoveredCategory = category.id"
                     @mouseleave="hoveredCategory = null"
                 >
-                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300 group-hover:scale-105">
+                    <div class="group relative bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100/50 hover:border-teal-200/50">
+                        <!-- Gradient Glow Effect on Hover -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-teal-400/0 via-cyan-500/0 to-blue-600/0 group-hover:from-teal-400/5 group-hover:via-cyan-500/5 group-hover:to-blue-600/5 transition-all duration-500 rounded-2xl"></div>
+                        
                         <!-- Category Image -->
                         <div class="relative aspect-square overflow-hidden">
                             <img 
                                 :src="category.image" 
                                 :alt="category.name"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                             >
-                            <!-- Overlay -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <!-- Glass Reflection Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             
                             <!-- Product Count Badge -->
-                            <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-gray-700 text-xs px-2 py-1 rounded-full font-medium">
-                                <span x-text="category.productCount"></span> products
+                            <div class="absolute top-3 right-3 bg-gradient-to-r from-purple-500 to-blue-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm">
+                                <span x-text="category.productCount"></span> items
                             </div>
                             
                             <!-- Quick View Button -->
                             <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <button class="bg-white/90 backdrop-blur-sm text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-white transition-colors">
-                                    Quick View
+                                <button class="bg-gradient-to-r from-teal-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                                    Explore
                                 </button>
                             </div>
                         </div>
                         
                         <!-- Category Info -->
-                        <div class="p-4">
-                            <h3 class="font-semibold text-gray-900 group-hover:text-primary-600 transition-colors mb-1" x-text="category.name"></h3>
-                            <p class="text-sm text-gray-500" x-text="category.description"></p>
+                        <div class="relative p-4">
+                            <h3 class="font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-teal-600 group-hover:to-blue-600 transition-all duration-300 mb-1" x-text="category.name"></h3>
+                            <p class="text-xs text-gray-600 leading-relaxed" x-text="category.description"></p>
                             
                             <!-- Popular Products Preview -->
                             <div class="mt-3 flex -space-x-2">
                                 <template x-for="product in category.popularProducts.slice(0, 3)" :key="product.id">
-                                    <div class="w-6 h-6 bg-gray-100 rounded-full border-2 border-white overflow-hidden">
+                                    <div class="w-6 h-6 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full border-2 border-white overflow-hidden shadow-sm">
                                         <img :src="product.image" :alt="product.name" class="w-full h-full object-cover">
                                     </div>
                                 </template>
-                                <div x-show="category.popularProducts.length > 3" class="w-6 h-6 bg-primary-100 rounded-full border-2 border-white flex items-center justify-center">
-                                    <span class="text-xs text-primary-600 font-medium">+<span x-text="category.popularProducts.length - 3"></span></span>
+                                <div x-show="category.popularProducts.length > 3" class="w-6 h-6 bg-gradient-to-br from-teal-100 to-blue-100 rounded-full border-2 border-white flex items-center justify-center shadow-sm">
+                                    <span class="text-xs text-teal-600 font-bold">+<span x-text="category.popularProducts.length - 3"></span></span>
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Neon Glow Border on Hover -->
+                        <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style="box-shadow: 0 0 30px rgba(20, 184, 166, 0.3);"></div>
                     </div>
                 </div>
             </template>
@@ -244,7 +250,15 @@ function categoryGrid() {
         },
         
         goToCategory(category) {
-            window.location.href = `/categories/${category.id}`;
+            // Map category names to routes
+            const categoryRoutes = {
+                'Dental Equipment': '{{ route('categories.dental') }}',
+                'Hospital Equipment': '{{ route('categories.hospital') }}',
+                'Clinic Essentials': '{{ route('categories.clinic') }}'
+            };
+            
+            const route = categoryRoutes[category.name] || '{{ route('categories.index') }}';
+            window.location.href = route;
         }
     }
 }

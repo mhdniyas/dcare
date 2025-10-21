@@ -10,9 +10,9 @@
                     <span class="hidden lg:inline">500K+ Users</span>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a href="/help" class="hover:text-accent-400 transition-colors">Help</a>
-                    <a href="/track-order" class="hover:text-accent-400 transition-colors">Track Order</a>
-                    <a href="/contact" class="hover:text-accent-400 transition-colors">Contact</a>
+                    <a href="{{ route('pages.help') }}" class="hover:text-accent-400 transition-colors">Help</a>
+                    <a href="{{ route('pages.track-order') }}" class="hover:text-accent-400 transition-colors">Track Order</a>
+                    <a href="{{ route('pages.contact') }}" class="hover:text-accent-400 transition-colors">Contact</a>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                 <div class="flex items-center justify-between py-4">
                     <!-- Logo -->
                     <div class="flex-shrink-0">
-                        <a href="/" class="flex items-center space-x-2 group">
+                        <a href="{{ route('home') }}" class="flex items-center space-x-2 group">
                             <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center group-hover:bg-primary-700 transition-colors">
                                 <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -46,7 +46,7 @@
                         <div class="relative" x-data="{ searchOpen: false }">
                             <input 
                                 type="text" 
-                                placeholder="Search over 20,000 Medical Products..." 
+                                placeholder="Search Medical Products..." 
                                 class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all"
                                 x-model="searchQuery"
                                 @focus="searchOpen = true"
@@ -119,17 +119,11 @@
                     </div>
                 </div>
                 
-                <!-- Row 2: Categories -->
+                <!-- Row 2: Navigation Menu -->
                 <div class="flex items-center justify-center space-x-1 py-3 border-t border-gray-200 overflow-x-auto scrollbar-hide">
-                    <a href="/categories/hospital" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Hospital Equipment</a>
-                    <a href="/categories/clinic" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Clinic Essentials</a>
-                    <a href="/categories/dental" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Dental Equipment</a>
-                    <a href="/categories/pharmaceuticals" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Pharmaceuticals</a>
-                    <a href="/categories/diagnostic" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Diagnostic Equipment</a>
-                    <a href="/categories/surgical" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Surgical Instruments</a>
-                    <a href="/categories/laboratory" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Laboratory Equipment</a>
-                    <a href="/categories/orthopedic" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Orthopedic</a>
-                    <a href="/categories/emergency" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Emergency Care</a>
+                    <a href="{{ route('products.index') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Products</a>
+                    <a href="{{ route('categories.index') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Categories</a>
+                    <a href="{{ route('marketplace') }}" class="bg-primary-50 text-primary-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-100 hover:text-primary-800 transition-colors whitespace-nowrap">Marketplace</a>
                 </div>
             </div>
 
@@ -137,7 +131,7 @@
             <div class="md:hidden">
                 <!-- Row 1: Logo and Account/Cart -->
                 <div class="flex items-center justify-between py-3">
-                    <a href="/" class="flex items-center space-x-2">
+                    <a href="{{ route('home') }}" class="flex items-center space-x-2">
                         <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
                             <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -197,6 +191,41 @@
                         </svg>
                     </button>
                 </div>
+                
+                <!-- Row 3: Mobile Navigation Menu -->
+                <div class="mb-3" x-data="{ selectedNav: null }">
+                    <div class="bg-gray-50 rounded-2xl p-3">
+                        <div class="flex overflow-x-auto gap-3 pb-1 scrollbar-hide">
+                            <div class="flex-shrink-0">
+                                <button 
+                                    @click="selectedNav = 'products'; window.location.href = '{{ route('products.index') }}'"
+                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    :class="selectedNav === 'products' ? 'bg-primary-100 text-primary-800' : ''"
+                                >
+                                    Products
+                                </button>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <button 
+                                    @click="selectedNav = 'categories'; window.location.href = '{{ route('categories.index') }}'"
+                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    :class="selectedNav === 'categories' ? 'bg-primary-100 text-primary-800' : ''"
+                                >
+                                    Categories
+                                </button>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <button 
+                                    @click="selectedNav = 'marketplace'; window.location.href = '{{ route('marketplace') }}'"
+                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    :class="selectedNav === 'marketplace' ? 'bg-primary-100 text-primary-800' : ''"
+                                >
+                                    Marketplace
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -234,13 +263,11 @@
                 </div>
                 
                 <nav class="space-y-4">
-                    <a href="/categories/hospital" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Hospital Equipment</a>
-                    <a href="/categories/clinic" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Clinic Essentials</a>
-                    <a href="/categories/dental" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Dental Equipment</a>
-                    <a href="/categories/pharmaceuticals" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Pharmaceuticals</a>
-                    <a href="/categories/diagnostic" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Diagnostic Equipment</a>
-                    <a href="/categories/surgical" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Surgical Instruments</a>
-                    <a href="/categories/laboratory" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Laboratory Equipment</a>
+                    <a href="{{ route('products.index') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Products</a>
+                    <a href="{{ route('categories.index') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Categories</a>
+                    <a href="{{ route('marketplace') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Marketplace</a>
+                    <a href="{{ route('pages.about') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">About</a>
+                    <a href="{{ route('pages.contact') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Contact</a>
                 </nav>
             </div>
         </div>

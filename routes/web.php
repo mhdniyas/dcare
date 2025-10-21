@@ -1,79 +1,82 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\Api\SearchController;
-use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController as ApiProductController;
+use App\Http\Controllers\Api\CategoryController as ApiCategoryController;
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\CartController;
 
-// Main Pages
-Route::get('/', function () {
-    return view('pages.dcare-home');
+// Main Application Routes
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Product Routes (using slugs)
+Route::prefix('products')->name('products.')->group(function () {
+    Route::get('/', [ProductController::class, 'index'])->name('index');
+    Route::get('/{product:slug}', [ProductController::class, 'show'])->name('show');
 });
+
+// Category Routes (using slugs)
+Route::prefix('categories')->name('categories.')->group(function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('index');
+    Route::get('/hospital', [CategoryController::class, 'hospital'])->name('hospital');
+    Route::get('/dental', [CategoryController::class, 'dental'])->name('dental');
+    Route::get('/clinic', [CategoryController::class, 'clinic'])->name('clinic');
+    Route::get('/{category:slug}', [CategoryController::class, 'show'])->name('show');
+});
+
+// Static Pages
+Route::prefix('pages')->name('pages.')->group(function () {
+    Route::get('/about-us', [PageController::class, 'about'])->name('about');
+    Route::get('/contact-us', [PageController::class, 'contact'])->name('contact');
+    Route::get('/help', [PageController::class, 'help'])->name('help');
+    Route::get('/track-order', [PageController::class, 'trackOrder'])->name('track-order');
+});
+
+// Business Routes
+Route::get('/quote', [PageController::class, 'quote'])->name('quote');
+Route::get('/marketplace', [PageController::class, 'marketplace'])->name('marketplace');
 
 // API Routes
-Route::prefix('api')->group(function () {
+Route::prefix('api')->name('api.')->group(function () {
     // Search endpoints
-    Route::get('/search', [SearchController::class, 'index']);
-    Route::get('/search/suggestions', [SearchController::class, 'suggestions']);
-    Route::get('/search/results', [SearchController::class, 'results']);
+    Route::prefix('search')->name('search.')->group(function () {
+        Route::get('/', [SearchController::class, 'index'])->name('index');
+        Route::get('/suggestions', [SearchController::class, 'suggestions'])->name('suggestions');
+        Route::get('/results', [SearchController::class, 'results'])->name('results');
+    });
     
-    // Product endpoints
-    Route::get('/products', [ProductController::class, 'index']);
-    Route::get('/products/featured', [ProductController::class, 'featured']);
-    Route::get('/products/{id}', [ProductController::class, 'show']);
+    // Product endpoints (using UUIDs)
+    Route::prefix('products')->name('products.')->group(function () {
+        Route::get('/', [ApiProductController::class, 'index'])->name('index');
+        Route::get('/featured', [ApiProductController::class, 'featured'])->name('featured');
+        Route::get('/{product:uuid}', [ApiProductController::class, 'show'])->name('show');
+    });
     
-    // Category endpoints
-    Route::get('/categories', [CategoryController::class, 'index']);
-    Route::get('/categories/featured', [CategoryController::class, 'featured']);
-    Route::get('/categories/{id}', [CategoryController::class, 'show']);
+    // Category endpoints (using UUIDs)
+    Route::prefix('categories')->name('categories.')->group(function () {
+        Route::get('/', [ApiCategoryController::class, 'index'])->name('index');
+        Route::get('/featured', [ApiCategoryController::class, 'featured'])->name('featured');
+        Route::get('/{category:uuid}', [ApiCategoryController::class, 'show'])->name('show');
+    });
     
-    // Brand endpoints
-    Route::get('/brands', [BrandController::class, 'index']);
-    Route::get('/brands/featured', [BrandController::class, 'featured']);
-    Route::get('/brands/{id}', [BrandController::class, 'show']);
+    // Brand endpoints (using UUIDs)
+    Route::prefix('brands')->name('brands.')->group(function () {
+        Route::get('/', [BrandController::class, 'index'])->name('index');
+        Route::get('/featured', [BrandController::class, 'featured'])->name('featured');
+        Route::get('/{brand:uuid}', [BrandController::class, 'show'])->name('show');
+    });
     
     // Cart endpoints
-    Route::get('/cart', [CartController::class, 'index']);
-    Route::post('/cart/add', [CartController::class, 'add']);
-    Route::put('/cart/{id}', [CartController::class, 'update']);
-    Route::delete('/cart/{id}', [CartController::class, 'remove']);
-    Route::delete('/cart', [CartController::class, 'clear']);
-});
-
-Route::get('/categories', function () {
-    return view('pages.categories');
-});
-
-Route::get('/marketplace', function () {
-    return view('pages.marketplace');
-});
-
-Route::get('/product', function () {
-    return view('pages.product');
-});
-
-Route::get('/about-us', function () {
-    return view('pages.about');
-});
-
-Route::get('/contact-us', function () {
-    return view('pages.contact');
-});
-
-Route::get('/hospital-products', function () {
-    return view('categories.hospital');
-});
-
-Route::get('/clinic-products', function () {
-    return view('categories.clinic');
-});
-
-Route::get('/dental-clinic-products', function () {
-    return view('categories.dental');
-});
-
-Route::get('/quote', function () {
-    return view('pages.quote');
+    Route::prefix('cart')->name('cart.')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::post('/add', [CartController::class, 'add'])->name('add');
+        Route::put('/{cartItem:uuid}', [CartController::class, 'update'])->name('update');
+        Route::delete('/{cartItem:uuid}', [CartController::class, 'remove'])->name('remove');
+        Route::delete('/', [CartController::class, 'clear'])->name('clear');
+    });
 });

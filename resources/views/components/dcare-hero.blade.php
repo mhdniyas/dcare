@@ -4,14 +4,14 @@
     <!-- Video Background -->
     <div class="absolute inset-0 z-0">
         <video 
-            class="w-full h-full object-cover opacity-20" 
+            class="w-full h-full object-cover opacity-90" 
             autoplay 
             muted 
             loop 
             playsinline
             x-ref="heroVideo"
         >
-            <source src="{{ asset('videos/4114797-uhd_3840_2160_25fps.mp4') }}" type="video/mp4">
+            <source src="{{ asset('videos/diwali.mp4') }}" type="video/mp4">
             <!-- Fallback image if video doesn't load -->
             <div class="w-full h-full bg-gradient-to-br from-primary-600 to-primary-800"></div>
         </video>
@@ -47,8 +47,8 @@
                 Your trusted source for premium medical equipment, dental supplies, and pharmaceutical products across India.
             </p>
             
-            <!-- Search Bar -->
-            <div class="max-w-2xl mx-auto mb-4 md:mb-8 animate-scale-in">
+            <!-- Search Bar - Desktop Only -->
+            <div class="hidden md:block max-w-2xl mx-auto mb-4 md:mb-8 animate-scale-in">
                 <div class="relative">
                     <input 
                         type="text" 
@@ -97,60 +97,36 @@
                 </div>
             </div>
             
-            <!-- Top Navigation Menu -->
-            <div class="mt-6 animate-slide-up">
+
+            
+            <!-- Top Navigation Menu - Desktop Only -->
+            <div class="hidden md:block mt-6 animate-slide-up">
                 <div class="bg-white/90 backdrop-blur-sm border border-white/50 rounded-xl p-4">
-                    <!-- Desktop Navigation -->
-                    <div class="hidden md:flex items-center justify-between">
+                    <div class="flex items-center justify-between">
                         <!-- Left Navigation -->
                         <div class="flex items-center space-x-6">
-                            <a href="/products" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">All Products</a>
-                            <a href="/categories" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Categories</a>
-                            <a href="/brands" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Brands</a>
-                            <a href="/offers" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Special Offers</a>
+                            <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">All Products</a>
+                            <a href="{{ route('categories.index') }}" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Categories</a>
+                            <a href="{{ route('marketplace') }}" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Marketplace</a>
+                            <a href="{{ route('pages.help') }}" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Help</a>
                         </div>
                         
                         <!-- Right Navigation -->
                         <div class="flex items-center space-x-6">
-                            <a href="/bulk-order" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Bulk Orders</a>
-                            <a href="/quote" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Get Quote</a>
-                            <a href="/support" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Support</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Mobile Navigation -->
-                    <div class="md:hidden" x-data="{ mobileNavOpen: false }">
-                        <button 
-                            @click="mobileNavOpen = !mobileNavOpen"
-                            class="w-full flex items-center justify-between text-gray-700 font-medium"
-                        >
-                            <span>Navigation Menu</span>
-                            <svg class="w-5 h-5 transition-transform" :class="mobileNavOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </button>
-                        
-                        <div x-show="mobileNavOpen" x-transition class="mt-4 space-y-3">
-                            <div class="grid grid-cols-2 gap-3">
-                                <a href="/products" class="text-gray-700 hover:text-primary-600 font-medium transition-colors text-sm">All Products</a>
-                                <a href="/categories" class="text-gray-700 hover:text-primary-600 font-medium transition-colors text-sm">Categories</a>
-                                <a href="/brands" class="text-gray-700 hover:text-primary-600 font-medium transition-colors text-sm">Brands</a>
-                                <a href="/offers" class="text-gray-700 hover:text-primary-600 font-medium transition-colors text-sm">Special Offers</a>
-                                <a href="/bulk-order" class="text-gray-700 hover:text-primary-600 font-medium transition-colors text-sm">Bulk Orders</a>
-                                <a href="/quote" class="text-gray-700 hover:text-primary-600 font-medium transition-colors text-sm">Get Quote</a>
-                                <a href="/support" class="text-gray-700 hover:text-primary-600 font-medium transition-colors text-sm">Support</a>
-                            </div>
+                            <a href="{{ route('pages.contact') }}" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Contact</a>
+                            <a href="{{ route('quote') }}" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Get Quote</a>
+                            <a href="{{ route('pages.track-order') }}" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Track Order</a>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Scrollable Categories -->
-            <div class="mt-6 animate-slide-up" x-data="{ selectedCategory: null }">
+            <!-- Scrollable Categories - Desktop Only -->
+            <div class="hidden md:block mt-6 animate-slide-up" x-data="{ selectedCategory: null }">
                 <div class="flex overflow-x-auto gap-4 pb-2 scrollbar-hide">
                     <div class="flex-shrink-0">
                         <button 
-                            @click="selectedCategory = 'dental'; window.location.href = '/categories/dental'"
+                            @click="selectedCategory = 'dental'; window.location.href = '{{ route('categories.dental') }}'"
                             class="bg-white/90 backdrop-blur-sm border border-white/50 text-black px-4 py-2 rounded-lg hover:bg-white transition-colors whitespace-nowrap font-medium"
                             :class="selectedCategory === 'dental' ? 'bg-white border-white shadow-lg' : ''"
                         >
@@ -159,7 +135,7 @@
                     </div>
                     <div class="flex-shrink-0">
                         <button 
-                            @click="selectedCategory = 'hospital'; window.location.href = '/categories/hospital'"
+                            @click="selectedCategory = 'hospital'; window.location.href = '{{ route('categories.hospital') }}'"
                             class="bg-white/90 backdrop-blur-sm border border-white/50 text-black px-4 py-2 rounded-lg hover:bg-white transition-colors whitespace-nowrap font-medium"
                             :class="selectedCategory === 'hospital' ? 'bg-white border-white shadow-lg' : ''"
                         >
@@ -168,8 +144,12 @@
                     </div>
                     <div class="flex-shrink-0">
                         <button 
-                            @click="selectedCategory = 'lab'; window.location.href = '/categories/lab'"
+                            @click="selectedCategory = 'clinic'; window.location.href = '{{ route('categories.clinic') }}'"
                             class="bg-white/90 backdrop-blur-sm border border-white/50 text-black px-4 py-2 rounded-lg hover:bg-white transition-colors whitespace-nowrap font-medium"
+                            :class="selectedCategory === 'clinic' ? 'bg-white border-white shadow-lg' : ''"
+                        >
+                            Clinic Equipment
+                        </button>white transition-colors whitespace-nowrap font-medium"
                             :class="selectedCategory === 'lab' ? 'bg-white border-white shadow-lg' : ''"
                         >
                             Lab Equipment

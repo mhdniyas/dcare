@@ -51,12 +51,12 @@
             <div>
                 <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
                 <ul class="space-y-3">
-                    <li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
-                    <li><a href="/contact" class="text-gray-300 hover:text-white transition-colors">Contact Us</a></li>
-                    <li><a href="/careers" class="text-gray-300 hover:text-white transition-colors">Careers</a></li>
-                    <li><a href="/help" class="text-gray-300 hover:text-white transition-colors">Help Center</a></li>
-                    <li><a href="/track-order" class="text-gray-300 hover:text-white transition-colors">Track Order</a></li>
-                    <li><a href="/returns" class="text-gray-300 hover:text-white transition-colors">Returns & Refunds</a></li>
+                    <li><a href="{{ route('pages.about') }}" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                    <li><a href="{{ route('pages.contact') }}" class="text-gray-300 hover:text-white transition-colors">Contact Us</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Careers</a></li>
+                    <li><a href="{{ route('pages.help') }}" class="text-gray-300 hover:text-white transition-colors">Help Center</a></li>
+                    <li><a href="{{ route('pages.track-order') }}" class="text-gray-300 hover:text-white transition-colors">Track Order</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Returns & Refunds</a></li>
                 </ul>
             </div>
             
@@ -64,12 +64,12 @@
             <div>
                 <h4 class="text-lg font-semibold mb-6">Categories</h4>
                 <ul class="space-y-3">
-                    <li><a href="/categories/hospital" class="text-gray-300 hover:text-white transition-colors">Hospital Equipment</a></li>
-                    <li><a href="/categories/dental" class="text-gray-300 hover:text-white transition-colors">Dental Equipment</a></li>
-                    <li><a href="/categories/surgical" class="text-gray-300 hover:text-white transition-colors">Surgical Instruments</a></li>
-                    <li><a href="/categories/pharmaceuticals" class="text-gray-300 hover:text-white transition-colors">Pharmaceuticals</a></li>
-                    <li><a href="/categories/diagnostic" class="text-gray-300 hover:text-white transition-colors">Diagnostic Equipment</a></li>
-                    <li><a href="/categories/laboratory" class="text-gray-300 hover:text-white transition-colors">Laboratory Equipment</a></li>
+                    <li><a href="{{ route('categories.hospital') }}" class="text-gray-300 hover:text-white transition-colors">Hospital Equipment</a></li>
+                    <li><a href="{{ route('categories.dental') }}" class="text-gray-300 hover:text-white transition-colors">Dental Equipment</a></li>
+                    <li><a href="{{ route('categories.clinic') }}" class="text-gray-300 hover:text-white transition-colors">Clinic Equipment</a></li>
+                    <li><a href="{{ route('categories.index') }}" class="text-gray-300 hover:text-white transition-colors">All Categories</a></li>
+                    <li><a href="{{ route('products.index') }}" class="text-gray-300 hover:text-white transition-colors">All Products</a></li>
+                    <li><a href="{{ route('marketplace') }}" class="text-gray-300 hover:text-white transition-colors">Marketplace</a></li>
                 </ul>
             </div>
             
