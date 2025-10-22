@@ -8,61 +8,28 @@
         </div>
         
         <!-- Category Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6">
-            <template x-for="category in categories" :key="category.id">
+        <div class="grid grid-cols-3 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
+            <template x-for="category in categories.slice(0, 3)" :key="category.id">
                 <div 
                     class="group cursor-pointer"
                     @click="goToCategory(category)"
                     @mouseenter="hoveredCategory = category.id"
                     @mouseleave="hoveredCategory = null"
                 >
-                    <div class="group relative bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100/50 hover:border-teal-200/50">
-                        <!-- Gradient Glow Effect on Hover -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-teal-400/0 via-cyan-500/0 to-blue-600/0 group-hover:from-teal-400/5 group-hover:via-cyan-500/5 group-hover:to-blue-600/5 transition-all duration-500 rounded-2xl"></div>
-                        
+                    <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
                         <!-- Category Image -->
-                        <div class="relative aspect-square overflow-hidden">
+                        <div class="relative aspect-video md:aspect-square overflow-hidden">
                             <img 
                                 :src="category.image" 
                                 :alt="category.name"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                                class="w-full h-full object-cover"
                             >
-                            <!-- Glass Reflection Overlay -->
-                            <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                            
-                            <!-- Product Count Badge -->
-                            <div class="absolute top-3 right-3 bg-gradient-to-r from-purple-500 to-blue-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm">
-                                <span x-text="category.productCount"></span> items
-                            </div>
-                            
-                            <!-- Quick View Button -->
-                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <button class="bg-gradient-to-r from-teal-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
-                                    Explore
-                                </button>
-                            </div>
                         </div>
                         
                         <!-- Category Info -->
-                        <div class="relative p-4">
-                            <h3 class="font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-teal-600 group-hover:to-blue-600 transition-all duration-300 mb-1" x-text="category.name"></h3>
-                            <p class="text-xs text-gray-600 leading-relaxed" x-text="category.description"></p>
-                            
-                            <!-- Popular Products Preview -->
-                            <div class="mt-3 flex -space-x-2">
-                                <template x-for="product in category.popularProducts.slice(0, 3)" :key="product.id">
-                                    <div class="w-6 h-6 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full border-2 border-white overflow-hidden shadow-sm">
-                                        <img :src="product.image" :alt="product.name" class="w-full h-full object-cover">
-                                    </div>
-                                </template>
-                                <div x-show="category.popularProducts.length > 3" class="w-6 h-6 bg-gradient-to-br from-teal-100 to-blue-100 rounded-full border-2 border-white flex items-center justify-center shadow-sm">
-                                    <span class="text-xs text-teal-600 font-bold">+<span x-text="category.popularProducts.length - 3"></span></span>
-                                </div>
-                            </div>
+                        <div class="p-3 text-center">
+                            <h3 class="font-semibold text-gray-900 text-sm" x-text="category.name"></h3>
                         </div>
-                        
-                        <!-- Neon Glow Border on Hover -->
-                        <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style="box-shadow: 0 0 30px rgba(20, 184, 166, 0.3);"></div>
                     </div>
                 </div>
             </template>
@@ -108,28 +75,6 @@
                 </template>
             </div>
         </div>
-        
-        <!-- Category Stats -->
-        <div class="mt-16 bg-gray-50 rounded-2xl p-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div>
-                    <div class="text-3xl font-bold text-primary-600 mb-2" x-text="totalCategories"></div>
-                    <div class="text-gray-600">Categories</div>
-                </div>
-                <div>
-                    <div class="text-3xl font-bold text-primary-600 mb-2" x-text="totalProducts"></div>
-                    <div class="text-gray-600">Products</div>
-                </div>
-                <div>
-                    <div class="text-3xl font-bold text-primary-600 mb-2" x-text="totalBrands"></div>
-                    <div class="text-gray-600">Brands</div>
-                </div>
-                <div>
-                    <div class="text-3xl font-bold text-primary-600 mb-2">24/7</div>
-                    <div class="text-gray-600">Support</div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 
@@ -140,74 +85,18 @@ function categoryGrid() {
         categories: [
             {
                 id: 1,
-                name: 'Dental Equipment',
-                description: 'Professional dental equipment',
-                image: '{{ asset("images/dental.jpg") }}',
-                productCount: 45,
-                popularProducts: [
-                    { id: 1, name: 'Dental Chair', image: '{{ asset("images/brands/1.jpg") }}' },
-                    { id: 2, name: 'Airotor', image: '{{ asset("images/brands/12.jpg") }}' },
-                    { id: 3, name: 'Autoclave', image: '{{ asset("images/brands/123.jpg") }}' }
-                ]
+                name: 'Hospital',
+                image: '{{ asset("images/hospital.jpg") }}'
             },
             {
                 id: 2,
-                name: 'Hospital Equipment',
-                description: 'Hospital medical equipment',
-                image: '{{ asset("images/hospital.jpg") }}',
-                productCount: 32,
-                popularProducts: [
-                    { id: 1, name: 'Patient Monitor', image: '{{ asset("images/brands/1.jpg") }}' },
-                    { id: 2, name: 'Ventilator', image: '{{ asset("images/brands/12.jpg") }}' },
-                    { id: 3, name: 'Defibrillator', image: '{{ asset("images/brands/123.jpg") }}' }
-                ]
+                name: 'Clinic',
+                image: '{{ asset("images/clinic.jpg") }}'
             },
             {
                 id: 3,
-                name: 'Clinic Essentials',
-                description: 'Essential clinic equipment',
-                image: '{{ asset("images/clinic.jpg") }}',
-                productCount: 28,
-                popularProducts: [
-                    { id: 1, name: 'Stethoscope', image: '{{ asset("images/brands/1.jpg") }}' },
-                    { id: 2, name: 'Blood Pressure Monitor', image: '{{ asset("images/brands/12.jpg") }}' },
-                    { id: 3, name: 'Thermometer', image: '{{ asset("images/brands/123.jpg") }}' }
-                ]
-            },
-            {
-                id: 4,
-                name: 'Special Offers',
-                description: 'Special discounted products',
-                image: '{{ asset("images/offer/special.jpg") }}',
-                productCount: 18,
-                popularProducts: [
-                    { id: 1, name: 'Discount Package', image: '{{ asset("images/offer/discount.jpg") }}' },
-                    { id: 2, name: 'Special Deal', image: '{{ asset("images/offer/aspecial.jpg") }}' }
-                ]
-            },
-            {
-                id: 5,
-                name: 'Diagnostic Equipment',
-                description: 'Medical diagnostic tools',
-                image: '{{ asset("images/default.jpg") }}',
-                productCount: 24,
-                popularProducts: [
-                    { id: 1, name: 'X-Ray Machine', image: '{{ asset("images/brands/1.jpg") }}' },
-                    { id: 2, name: 'Ultrasound', image: '{{ asset("images/brands/12.jpg") }}' },
-                    { id: 3, name: 'ECG Machine', image: '{{ asset("images/brands/123.jpg") }}' }
-                ]
-            },
-            {
-                id: 6,
-                name: 'Surgical Instruments',
-                description: 'Professional surgical tools',
-                image: '{{ asset("images/default.jpg") }}',
-                productCount: 36,
-                popularProducts: [
-                    { id: 1, name: 'Surgical Scissors', image: '{{ asset("images/brands/1.jpg") }}' },
-                    { id: 2, name: 'Forceps', image: '{{ asset("images/brands/12.jpg") }}' },
-                    { id: 3, name: 'Scalpel', image: '{{ asset("images/brands/123.jpg") }}' }
-                ]
+                name: 'Dental',
+                image: '{{ asset("images/dental.jpg") }}'
             }
         ],
         featuredCategories: [
@@ -237,17 +126,7 @@ function categoryGrid() {
             }
         ],
         
-        get totalCategories() {
-            return this.categories.length;
-        },
-        
-        get totalProducts() {
-            return this.categories.reduce((sum, category) => sum + category.productCount, 0);
-        },
-        
-        get totalBrands() {
-            return 150; // This would come from API
-        },
+
         
         goToCategory(category) {
             // Map category names to routes
