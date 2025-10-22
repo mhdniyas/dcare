@@ -5,13 +5,13 @@
         @scroll.window="scrolled = window.scrollY > 50"
         x-init="scrolled = false">
     <!-- Top Navigation Bar - Desktop Only -->
-    <div class="hidden md:block bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-black py-2 shadow-lg">
+    <div class="hidden md:block bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-black py-1 shadow-sm">
         <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between text-sm">
-                <div class="flex items-center space-x-4">
-                    <span class="font-medium text-black">Over 20,000+ Medical Products</span>
+            <div class="flex items-center justify-between text-xs">
+                <div class="flex items-center space-x-3">
+                    <span class="font-medium text-black">100K+ Products</span>
                     <span class="text-black/60">•</span>
-                    <span class="text-black/80">500K+ Users</span>
+                    <span class="text-black/80">50K+ Users</span>
                 </div>
                 <div class="flex items-center space-x-6">
                     <a href="{{ route('pages.help') }}" class="text-black hover:text-accent-400 transition-colors font-medium hover:scale-105 transform">Help</a>
@@ -33,13 +33,13 @@
                 <div class="flex items-center justify-between py-4">
                     <!-- Logo -->
                     <div class="flex-shrink-0">
-                        <a href="{{ route('home') }}" class="flex items-center space-x-3 group">
-                            <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center group-hover:from-primary-700 group-hover:to-primary-800 transition-all duration-300 shadow-lg group-hover:shadow-xl group-hover:scale-105 transform">
-                                <img src="{{ asset('d.png') }}" alt="D Care Logo" class="w-7 h-7 object-contain">
+                        <a href="{{ route('home') }}" class="flex items-center space-x-2 group">
+                            <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg flex items-center justify-center group-hover:from-primary-700 group-hover:to-primary-800 transition-all duration-300 shadow-md group-hover:shadow-lg group-hover:scale-105 transform">
+                                <img src="{{ asset('dcarelogo.png') }}" alt="D Care Logo" class="w-6 h-6 object-contain">
                             </div>
                             <div>
-                                <h1 class="text-2xl font-bold text-primary-600 group-hover:text-primary-700 transition-colors">D Care</h1>
-                                <p class="text-xs text-gray-500 font-medium">Medical Solutions</p>
+                                <h1 class="text-xl font-bold text-primary-600 group-hover:text-primary-700 transition-colors">D Care</h1>
+                                <p class="text-xs text-gray-500 font-medium">Pharmaceuticals</p>
                             </div>
                         </a>
                     </div>
@@ -50,7 +50,7 @@
                             <input 
                                 type="text" 
                                 placeholder="Search Medical Products..." 
-                                class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all"
+                                class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-200 transition-all text-sm"
                                 x-model="searchQuery"
                                 @focus="searchOpen = true"
                                 @blur="setTimeout(() => searchOpen = false, 200)"
@@ -141,15 +141,15 @@
 
             <!-- Mobile Layout -->
             <div class="md:hidden">
-                <!-- Row 1: Logo and Account/Cart -->
-                <div class="flex items-center justify-between py-3">
-                    <a href="{{ route('home') }}" class="flex items-center space-x-2">
-                        <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg">
-                            <img src="{{ asset('d.png') }}" alt="D Care Logo" class="w-6 h-6 object-contain">
+                <!-- Combined Row: Logo, Search, and Actions -->
+                <div class="flex items-center justify-between py-2">
+                    <a href="{{ route('home') }}" class="flex items-center space-x-2 flex-shrink-0">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg flex items-center justify-center shadow">
+                            <img src="{{ asset('dcarelogo.png') }}" alt="D Care Logo" class="w-5 h-5 object-contain">
                         </div>
                         <div>
-                            <h1 class="text-xl font-bold text-primary-600">D Care</h1>
-                            <p class="text-xs text-gray-500 font-medium">Medical Solutions</p>
+                            <h1 class="text-base font-bold text-primary-600 leading-tight">D Care</h1>
+                            <p class="text-xs text-gray-500 font-medium -mt-0.5">Pharmaceuticals</p>
                         </div>
                     </a>
                     
@@ -174,7 +174,7 @@
                         </button>
                         <button 
                             class="text-gray-700 hover:text-primary-600 transition-colors"
-                            @click="toggleMobileMenu()"
+                            @click="$dispatch('toggle-sidebar')"
                         >
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -183,33 +183,39 @@
                     </div>
                 </div>
                 
-                <!-- Row 2: Search Bar -->
-                <div class="relative mb-3">
+                <!-- Inline Search Bar -->
+                <div class="relative flex-1 mx-2 mb-2">
                     <input 
                         type="text" 
-                        placeholder="Search medical products..." 
-                        class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+                        placeholder="Search products..." 
+                        class="w-full px-2 py-1.5 pr-8 border border-gray-300 rounded-md focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-200 text-xs"
                         x-model="searchQuery"
                         @keyup.enter="performSearch()"
                     >
-                    <button 
-                        class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary-600 text-white p-2 rounded-md hover:bg-primary-700 transition-colors"
-                        @click="performSearch()"
-                    >
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                        </svg>
-                    </button>
+                    <div class="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8">
+                        <button 
+                            x-show="!isLoading"
+                            class="bg-primary-600 text-white p-1.5 rounded-md hover:bg-primary-700 transition-colors"
+                            @click="performSearch()"
+                        >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </button>
+                        <div x-show="isLoading" class="transform scale-75">
+                            <x-loader />
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- Row 3: Mobile Navigation Menu -->
-                <div class="mb-3" x-data="{ selectedNav: null }">
-                    <div class="bg-gray-50 rounded-2xl p-3">
-                        <div class="flex overflow-x-auto gap-3 pb-1 scrollbar-hide">
+                <!-- Compact Mobile Navigation Menu -->
+                <div class="mb-2" x-data="{ selectedNav: null }">
+                    <div class="p-1.5 bg-gray-100/80 backdrop-blur-sm">
+                        <div class="flex overflow-x-auto gap-2 scrollbar-hide no-scrollbar">
                             <div class="flex-shrink-0">
                                 <button 
                                     @click="selectedNav = 'home'; window.location.href = '{{ route('home') }}'"
-                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    class="bg-white shadow-sm text-gray-800 px-3 py-1.5 rounded-md hover:bg-primary-50 hover:text-primary-600 transition-all whitespace-nowrap text-xs font-medium"
                                     :class="selectedNav === 'home' ? 'bg-primary-100 text-primary-800' : ''"
                                 >
                                     Home
@@ -218,7 +224,7 @@
                             <div class="flex-shrink-0">
                                 <button 
                                     @click="selectedNav = 'products'; window.location.href = '{{ route('products.index') }}'"
-                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    class="bg-white shadow-sm text-gray-800 px-3 py-1.5 rounded-md hover:bg-primary-50 hover:text-primary-600 transition-all whitespace-nowrap text-xs font-medium"
                                     :class="selectedNav === 'products' ? 'bg-primary-100 text-primary-800' : ''"
                                 >
                                     Products
@@ -227,7 +233,7 @@
                             <div class="flex-shrink-0">
                                 <button 
                                     @click="selectedNav = 'categories'; window.location.href = '{{ route('categories.index') }}'"
-                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    class="bg-white shadow-sm text-gray-800 px-3 py-1.5 rounded-md hover:bg-primary-50 hover:text-primary-600 transition-all whitespace-nowrap text-xs font-medium"
                                     :class="selectedNav === 'categories' ? 'bg-primary-100 text-primary-800' : ''"
                                 >
                                     Categories
@@ -236,7 +242,7 @@
                             <div class="flex-shrink-0">
                                 <button 
                                     @click="selectedNav = 'hospital'; window.location.href = '{{ route('categories.hospital') }}'"
-                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    class="bg-white shadow-sm text-gray-800 px-3 py-1.5 rounded-md hover:bg-primary-50 hover:text-primary-600 transition-all whitespace-nowrap text-xs font-medium"
                                     :class="selectedNav === 'hospital' ? 'bg-primary-100 text-primary-800' : ''"
                                 >
                                     Hospital
@@ -245,7 +251,7 @@
                             <div class="flex-shrink-0">
                                 <button 
                                     @click="selectedNav = 'dental'; window.location.href = '{{ route('categories.dental') }}'"
-                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    class="bg-white shadow-sm text-gray-800 px-3 py-1.5 rounded-md hover:bg-primary-50 hover:text-primary-600 transition-all whitespace-nowrap text-xs font-medium"
                                     :class="selectedNav === 'dental' ? 'bg-primary-100 text-primary-800' : ''"
                                 >
                                     Dental
@@ -254,7 +260,7 @@
                             <div class="flex-shrink-0">
                                 <button 
                                     @click="selectedNav = 'clinic'; window.location.href = '{{ route('categories.clinic') }}'"
-                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    class="bg-white shadow-sm text-gray-800 px-3 py-1.5 rounded-md hover:bg-primary-50 hover:text-primary-600 transition-all whitespace-nowrap text-xs font-medium"
                                     :class="selectedNav === 'clinic' ? 'bg-primary-100 text-primary-800' : ''"
                                 >
                                     Clinic
@@ -263,7 +269,7 @@
                             <div class="flex-shrink-0">
                                 <button 
                                     @click="selectedNav = 'marketplace'; window.location.href = '{{ route('marketplace') }}'"
-                                    class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-100 transition-all whitespace-nowrap text-sm font-semibold tracking-wide"
+                                    class="bg-white shadow-sm text-gray-800 px-3 py-1.5 rounded-md hover:bg-primary-50 hover:text-primary-600 transition-all whitespace-nowrap text-xs font-medium"
                                     :class="selectedNav === 'marketplace' ? 'bg-primary-100 text-primary-800' : ''"
                                 >
                                     Marketplace
@@ -276,55 +282,7 @@
         </div>
     </div>
 
-    <!-- Mobile Menu Overlay -->
-    <div 
-        x-show="mobileMenuOpen" 
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        class="fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden"
-        @click="mobileMenuOpen = false"
-    >
-        <div 
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="transform -translate-x-full"
-            x-transition:enter-end="transform translate-x-0"
-            x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="transform translate-x-0"
-            x-transition:leave-end="transform -translate-x-full"
-            class="fixed left-0 top-0 h-full w-80 bg-white shadow-xl"
-            @click.stop
-        >
-            <div class="p-6">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-lg font-semibold text-gray-900">Menu</h2>
-                    <button @click="mobileMenuOpen = false" class="text-gray-500 hover:text-gray-700">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                </div>
-                
-                <nav class="space-y-4">
-                    <a href="{{ route('home') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Home</a>
-                    <a href="{{ route('products.index') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Products</a>
-                    <a href="{{ route('categories.index') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Categories</a>
-                    <a href="{{ route('categories.hospital') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Hospital Equipment</a>
-                    <a href="{{ route('categories.dental') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Dental Equipment</a>
-                    <a href="{{ route('categories.clinic') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Clinic Equipment</a>
-                    <a href="{{ route('marketplace') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Marketplace</a>
-                    <a href="{{ route('quote') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Get Quote</a>
-                    <a href="{{ route('pages.about') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">About Us</a>
-                    <a href="{{ route('pages.contact') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Contact Us</a>
-                    <a href="{{ route('pages.help') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Help</a>
-                    <a href="{{ route('pages.track-order') }}" class="block py-2 text-gray-700 hover:text-primary-600 transition-colors">Track Order</a>
-                </nav>
-            </div>
-        </div>
-    </div>
+
 </header>
 
 <script>
@@ -336,6 +294,7 @@ function headerComponent() {
         mobileMenuOpen: false,
         cartOpen: false,
         scrolled: false,
+        isLoading: false,
         
         init() {
             // Initialize scroll state
@@ -370,7 +329,10 @@ function headerComponent() {
         
         performSearch() {
             if (this.searchQuery.trim()) {
-                window.location.href = `/search?q=${encodeURIComponent(this.searchQuery)}`;
+                this.isLoading = true;
+                setTimeout(() => {
+                    window.location.href = `/search?q=${encodeURIComponent(this.searchQuery)}`;
+                }, 500);
             }
         },
         
@@ -380,9 +342,7 @@ function headerComponent() {
             window.location.href = `/products/${suggestion.id}`;
         },
         
-        toggleMobileMenu() {
-            this.mobileMenuOpen = !this.mobileMenuOpen;
-        },
+
         
         toggleCart() {
             this.cartOpen = !this.cartOpen;

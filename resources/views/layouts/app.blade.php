@@ -16,12 +16,14 @@
 <body class="bg-white text-gray-900 antialiased">
     @include('components.dcare-header')
     
-    <main>
+    <main class="pb-16 md:pb-0">
         @yield('content')
     </main>
     
     @include('components.dcare-footer')
     @include('components.dcare-cart-sidebar')
+    @include('components.dcare-sidebar')
+    @include('components.dcare-bottom-nav')
     
     @stack('scripts')
 </body>

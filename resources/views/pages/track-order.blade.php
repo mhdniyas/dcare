@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Track Your Order - D Care Medical Solutions')
+@section('title', 'Track Your Order - D Care Pharmaceuticals')
 @section('description', 'Track your medical equipment order status and delivery information.')
 
 @section('content')

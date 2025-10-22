@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Help & Support - D Care Medical Solutions')
+@section('title', 'Help & Support - D Care Pharmaceuticals')
 @section('description', 'Get help and support for your medical equipment needs. Find answers to common questions and contact our expert team.')
 
 @section('content')

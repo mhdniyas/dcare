@@ -13,7 +13,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl font-bold">D Care</h3>
-                        <p class="text-sm text-gray-400">Medical Solutions</p>
+                        <p class="text-sm text-gray-400">Pharmaceuticals</p>
                     </div>
                 </div>
                 
