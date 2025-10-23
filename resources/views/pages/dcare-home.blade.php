@@ -8,24 +8,13 @@
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary-600 text-white px-4 py-2 rounded-lg z-50">Skip to main content</a>
     
     <div id="main-content" role="main">
-        <!-- Hero Section -->
         @include('components.dcare-hero')
-        
-        
-        <!-- Brand Carousel -->
-        @include('components.dcare-brand-carousel')
-
-        
-        <!-- Category Grid -->
         @include('components.dcare-category-grid')
-
-         <!-- Most Selling Products -->
-        @include('components.dcare-most-selling')
-        
-        
-        <!-- Featured Categories -->
+        @include('components.dcare-recently-viewed')
+        @include('components.dcare-brand-carousel')
         @include('components.dcare-featured-categories')
-        
+        @include('components.dcare-most-selling')
+
        
         <!-- Testimonials Section -->
         <section class="py-8 bg-white">
